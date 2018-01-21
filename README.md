@@ -12,3 +12,8 @@ Edit the JSON files located in the config folder
 npm install
 node dump
 ```
+
+#### Restore to Local DB
+```
+mongorestore (--drop parameter is required in order to delete an existing collection of the same name)
+```

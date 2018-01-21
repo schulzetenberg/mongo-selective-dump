@@ -2,7 +2,7 @@ const { exec } = require('child_process');
 const config  = require('config');
 
 var query = '{ "_id": { "$gt": ' + dateToId(config.start) + ', "$lte": ' + dateToId(config.end) + ' }}';
-let command = "mongodump --db " + config.db + " --query '" + query + "'";
+var command = "mongodump --db " + config.db + " --query '" + query + "'";
 
 if(config.port) command += ' --port ' + config.port;
 if(config.host) command += ' --host ' + config.host;
@@ -13,7 +13,7 @@ if(config.username && config.password && config.authenticationDatabase) {
 
 for(let i=0, x=config.collections.length; i<x; i++) {
    let fullCommand = command + ' --collection ' + config.collections[i];
-   runCommand(fullCommand)
+   runCommand(fullCommand);
 }
 
 function runCommand(command) {
