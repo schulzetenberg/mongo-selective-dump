@@ -2,7 +2,7 @@ const { exec } = require('child_process');
 const config  = require('config');
 
 var query = '{ "_id": { "$gt": ' + dateToId(config.start) + ', "$lte": ' + dateToId(config.end) + ' }}';
-var command = "mongodump --db " + config.db + " --collection " + config.collection + " --query '" + query + "'";
+let command = "mongodump --db " + config.db + " --query '" + query + "'";
 
 if(config.port) command += ' --port ' + config.port;
 if(config.host) command += ' --host ' + config.host;
@@ -11,15 +11,22 @@ if(config.username && config.password && config.authenticationDatabase) {
   command += ' --username ' + config.username + ' --password ' + config.password + ' --authenticationDatabase ' + config.authenticationDatabase;
 }
 
-exec(command, (err, stdout, stderr) => {
-  if (err) {
-    console.log(err);
-    return;
-  }
+for(let i=0, x=config.collections.length; i<x; i++) {
+   let fullCommand = command + ' --collection ' + config.collections[i];
+   runCommand(fullCommand)
+}
 
-  console.log(`stdout: ${stdout}`);
-  console.log(`stderr: ${stderr}`);
-});
+function runCommand(command) {
+  exec(command, (err, stdout, stderr) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+
+    console.log(`stdout: ${stdout}`);
+    console.log(`stderr: ${stderr}`);
+  });
+}
 
 // Convert a date into an ObjectId string
 // Accepts both Date object and string input

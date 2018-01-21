@@ -6,7 +6,10 @@
 
   "db": "mainDatabase",
 
-  "collection": "usersCollection",
+  "collections": [
+    "usersCollection",
+    "adminCollection"
+  ],
 
   "host": "localhost", // Optional
 
