@@ -1,0 +1,22 @@
+{
+    "asi"      : true,
+    "browser"  : true,
+    "eqeqeq"   : false,
+    "eqnull"   : true,
+    "expr"     : true,
+    "jquery"   : true,
+    "latedef"  : "nofunc",
+    "laxbreak" : true,
+    "node"     : true,
+    "nonbsp"   : true,
+    "undef"    : true,
+    "unused"   : true,
+    "predef":  [
+        "describe",
+        "before",
+        "after",
+        "beforeEach",
+        "it"
+    ],
+    "esversion": 6
+}
